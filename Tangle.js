@@ -206,20 +206,28 @@ var Tangle = this.Tangle = function (rootElement, modelClass) {
         return formatter;
     }
     
+    function numberWithCommas(x) {
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    }
+
     function getFormatterForSprintfFormat(formatAttribute, varNames) {
         if (!sprintf || !formatAttribute.test(/\%/)) { return null; }
 
         var formatter;
         if (varNames.length <= 1) {  // one variable
             formatter = function (value) {
-                return sprintf(formatAttribute, value);
+                // return sprintf(formatAttribute, value);
+                return numberWithCommas(sprintf(formatAttribute, value));
             };
         }
         else {
             formatter = function (value) {  // multiple variables
                 var values = getValuesForVariables(varNames);
                 var args = [ formatAttribute ].concat(values);
-                return sprintf.apply(null, args);
+                // return sprintf.apply(null, args);
+                return numberWithCommas(sprintf.apply(null, args));
             };
         }
         return formatter;

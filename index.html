@@ -154,10 +154,10 @@ function setUpTangle () {
             <span class="column"></span>
             <span class="column" data-var="total_with_disease" data-format="%d"></span>
             <span class="column" data-var="total_without_disease" data-format="%d"></span>
-            <span class="column"><span data-var="population" class="TKAdjustableNumber" data-min="10000" data-max="1000000" data-step="10000"> people</span></span>
+            <span class="column"><span data-var="population" class="TKAdjustableNumber" data-min="10000" data-max="1000000" data-step="10000" data-format="%d"> people</span></span>
         </span>
     
-        With these numbers, Wendy has <strong><span data-var="bayes_number" data-format="%8.2f"> percent</span></strong> of chance that she really has <strong>disease X</strong> if tested positive for it.
+        In this case, Wendy has <strong><span data-var="bayes_number" data-format="%8.2f"> percent</span></strong> of chance that she really has <strong>disease X</strong> if tested positive for it.
     </p>
     
 
@@ -176,11 +176,11 @@ function setUpTangle () {
         Let's say you bet 
         <span data-var="bet" class="TKAdjustableNumber" data-min="1" data-max="99"> dollars</span>
         to win a total of 
-        <span data-var="prize" class="TKAdjustableNumber" data-step="10" data-min="10" data-max="10000"> dollars</span>,
+        <span data-var="prize" class="TKAdjustableNumber" data-step="10" data-min="10" data-max="10000" data-format="%d"> dollars</span>,
         and you have
         <span data-var="win_chance" class="TKAdjustableNumber" data-step="1" data-min="1" data-max="99"></span>
         in
-        <span data-var="total_chances" class="TKAdjustableNumber" data-step="10" data-min="100" data-max="50000"></span>
+        <span data-var="total_chances" class="TKAdjustableNumber" data-step="10" data-min="100" data-max="50000" data-format="%d"></span>
         chances of winning.
         <br/>
         <br/>
