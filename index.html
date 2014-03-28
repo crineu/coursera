@@ -1,1 +1,134 @@
-No me creo
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Coursera week 9</title>
+
+    <!-- Tangle -->
+    <script type="text/javascript" src="Tangle.js"></script>
+
+    <!-- TangleKit (optional) -->
+    <link rel="stylesheet" href="TangleKit/TangleKit.css" type="text/css">
+    <link rel="stylesheet" href="week_9.css" type="text/css">
+    <script type="text/javascript" src="TangleKit/mootools.js"></script>
+    <script type="text/javascript" src="TangleKit/sprintf.js"></script>
+    <script type="text/javascript" src="TangleKit/BVTouchable.js"></script>
+    <script type="text/javascript" src="TangleKit/TangleKit.js"></script>
+
+    <!-- example -->
+    <script type="text/javascript">
+
+        function setUpTangle () {
+            var element = document.getElementById("bet");
+
+            var tangle = new Tangle(element, {
+                initialize: function () {
+                    this.bet = 10;
+                    this.prize = 20;
+                    this.win_chance = 1;
+                    this.total_chances = 100;
+                    this.kind_of_bet = "neutral bet - keep yourself safe";
+                },
+                update: function () {
+                    var net_prize = (this.prize - this.bet);
+                    var win_probability = this.win_chance / this.total_chances;
+                    var lose_probability = 1.0 - win_probability;
+                    this.expected_return = (net_prize * win_probability) - (this.bet * lose_probability);
+                    if (this.expected_return > 0.0) {
+                        this.kind_of_bet = "favorable bet! Drain your savings!!";
+                    } else if (this.expected_return < 0.0) {
+                        this.kind_of_bet = "unfavorable bet :(";
+                    } else {
+                        this.kind_of_bet = "neutral bet - keep yourself safe";
+                    }
+                }
+            });
+
+            var element = document.getElementById("free_bet");
+
+            var f_tangle = new Tangle(element, {
+                initialize: function () {
+                    this.f_bet = 10;
+                    this.f_prize = 20;
+                    this.f_win_chance = 1;
+                    this.f_total_chances = 100;
+                    this.f_kind_of_bet = "neutral bet - keep yourself safe";
+                },
+                update: function () {
+                    var net_prize = (this.f_prize - this.f_bet);
+                    var win_probability = this.f_win_chance / this.f_total_chances;
+                    var lose_probability = 1.0 - win_probability;
+                    this.f_expected_return = (net_prize * win_probability) - (this.f_bet * lose_probability);
+                    if (this.f_expected_return > 0.0) {
+                    	this.f_kind_of_bet = "favorable bet! Drain your savings!!";
+                    } else if (this.f_expected_return < 0.0) {
+                    	this.f_kind_of_bet = "unfavorable bet :(";
+                    } else {
+                    	this.f_kind_of_bet = "neutral bet - keep yourself safe";
+                    }
+                }
+            });
+        }
+
+    </script>
+</head>
+
+<body onload="setUpTangle();">
+<div id="everything">
+    <div id="header">
+        <h1>Week 9</h1>
+        <h3>Think Again: How to Reason and Argue</h3>
+    </div>
+
+	<h2>Expected Monetary Value</h2>
+
+    <p>This page helps you with betting.<br/>
+        I mean... you should not bet (right?).<br/>
+        But if you do, you have to know this:</p>
+
+	<p> <strong>Expected monetary value</strong> = (<strong>probability of winning</strong> times <strong>net gain in money of winning</strong>) minus (<strong>probability of losing</strong> times <stron>net loss in money of losing</stron>)</p>
+
+    <p id="bet" class="example">
+        Let's say you bet 
+        <span data-var="bet" class="TKAdjustableNumber" data-min="1" data-max="99"> dollars</span>
+        to win a total of 
+        <span data-var="prize" class="TKAdjustableNumber" data-step="10" data-min="10" data-max="10000"> dollars</span>,
+        and you have
+        <span data-var="win_chance" class="TKAdjustableNumber" data-step="1" data-min="1" data-max="99"></span>
+        in
+        <span data-var="total_chances" class="TKAdjustableNumber" data-step="10" data-min="100" data-max="50000"></span>
+        chances of winning.
+        <br/>
+        <br/>
+        It's obvious that the expected return is <strong>US$
+        <span data-var="expected_return" data-format="%8.2f" /></strong>.
+        <br/>
+        And this is a (financial)
+        <strong><span data-var="kind_of_bet"></span></strong>.
+    </p>
+
+    <p>Feel free to enter your numbers in this case:</p>
+
+    <p id="free_bet" class="example">
+        Let's say you bet 
+        <span data-var="f_bet" class="TKNumberField"> dollars</span>
+        to win a total of 
+        <span data-var="f_prize" class="TKNumberField"> dollars</span>,
+        and you have
+        <span data-var="f_win_chance" class="TKNumberField"></span>
+        in
+        <span data-var="f_total_chances" class="TKNumberField"></span>
+        chances of winning.
+        <br/>
+        <br/>
+        It's obvious that the expected return is <strong>US$
+        <span data-var="f_expected_return" data-format="%8.2f" /></strong>.
+        <br/>
+        And this is a (financial)
+        <strong><span data-var="f_kind_of_bet"></span></strong>.
+    </p>
+
+    </p>Totally based on <a href="www.worrydream.com/Tangle">Bret Victor's work</a>.
+</div>
+</body>
+</html>
