@@ -23,7 +23,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   height:100%;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
 }
 
 #header {
@@ -48,6 +48,7 @@ body {
   color: #fff;
   position:absolute;
   left: 35px;
+  font-weight: bold;
 }
 
 #header h3 {
@@ -149,9 +150,14 @@ strong {
   color: #355FA8;
 }
 
+.footer {
+  text-align: right;
+  color: ##777770;
+}
 .cursorDrag {
 	cursor: pointer;
 	cursor: move;
 }
+
 
 
