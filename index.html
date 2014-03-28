@@ -18,57 +18,85 @@
     <!-- example -->
     <script type="text/javascript">
 
-        function setUpTangle () {
-            var element = document.getElementById("bet");
+function setUpTangle () {
 
-            var tangle = new Tangle(element, {
-                initialize: function () {
-                    this.bet = 10;
-                    this.prize = 20;
-                    this.win_chance = 1;
-                    this.total_chances = 100;
-                    this.kind_of_bet = "neutral bet - keep yourself safe";
-                },
-                update: function () {
-                    var net_prize = (this.prize - this.bet);
-                    var win_probability = this.win_chance / this.total_chances;
-                    var lose_probability = 1.0 - win_probability;
-                    this.expected_return = (net_prize * win_probability) - (this.bet * lose_probability);
-                    if (this.expected_return > 0.0) {
-                        this.kind_of_bet = "favorable bet! Drain your savings!!";
-                    } else if (this.expected_return < 0.0) {
-                        this.kind_of_bet = "unfavorable bet :(";
-                    } else {
-                        this.kind_of_bet = "neutral bet - keep yourself safe";
-                    }
-                }
-            });
+    var baye_element = document.getElementById("baye");
+    var tangle = new Tangle(baye_element, {
+        initialize: function () {
+            this.base_rate = 0.3;
+            this.sensitivity = 90;
+            this.specificity = 95;
+            this.population = 100000;
+        },
+        update: function () {
+            // Population is divided
+            this.total_with_disease = this.population * (this.base_rate / 100);
+            this.total_without_disease = this.population - this.total_with_disease;
 
-            var element = document.getElementById("free_bet");
+            // Hit is a true positive; a false negative is a miss
+            this.hit = this.total_with_disease * (this.sensitivity / 100);
+            this.miss = this.total_with_disease - this.hit;
 
-            var f_tangle = new Tangle(element, {
-                initialize: function () {
-                    this.f_bet = 10;
-                    this.f_prize = 20;
-                    this.f_win_chance = 1;
-                    this.f_total_chances = 100;
-                    this.f_kind_of_bet = "neutral bet - keep yourself safe";
-                },
-                update: function () {
-                    var net_prize = (this.f_prize - this.f_bet);
-                    var win_probability = this.f_win_chance / this.f_total_chances;
-                    var lose_probability = 1.0 - win_probability;
-                    this.f_expected_return = (net_prize * win_probability) - (this.f_bet * lose_probability);
-                    if (this.f_expected_return > 0.0) {
-                    	this.f_kind_of_bet = "favorable bet! Drain your savings!!";
-                    } else if (this.f_expected_return < 0.0) {
-                    	this.f_kind_of_bet = "unfavorable bet :(";
-                    } else {
-                    	this.f_kind_of_bet = "neutral bet - keep yourself safe";
-                    }
-                }
-            });
+            // A false positive is a false alarm
+            this.true_negative = this.total_without_disease * (this.specificity / 100);
+            this.false_alarm = this.total_without_disease - this.true_negative;
+
+            this.total_positive = this.hit + this.false_alarm;
+            this.total_negative = this.true_negative + this.miss;
+
+            this.baye_number = 100 * this.hit / this.total_positive;
         }
+    });
+
+    var bet_element = document.getElementById("bet");
+    var tangle = new Tangle(bet_element, {
+        initialize: function () {
+            this.bet = 10;
+            this.prize = 20;
+            this.win_chance = 1;
+            this.total_chances = 100;
+            this.kind_of_bet = "neutral bet - keep yourself safe";
+        },
+        update: function () {
+            var net_prize = (this.prize - this.bet);
+            var win_probability = this.win_chance / this.total_chances;
+            var lose_probability = 1.0 - win_probability;
+            this.expected_return = (net_prize * win_probability) - (this.bet * lose_probability);
+            if (this.expected_return > 0.0) {
+                this.kind_of_bet = "favorable bet! Drain your savings!!";
+            } else if (this.expected_return < 0.0) {
+                this.kind_of_bet = "unfavorable bet :(";
+            } else {
+                this.kind_of_bet = "neutral bet - keep yourself safe";
+            }
+        }
+    });
+
+    var f_bet_element = document.getElementById("free_bet");
+
+    var f_tangle = new Tangle(f_bet_element, {
+        initialize: function () {
+            this.f_bet = 10;
+            this.f_prize = 20;
+            this.f_win_chance = 1;
+            this.f_total_chances = 100;
+            this.f_kind_of_bet = "neutral bet - keep yourself safe";
+        },
+        update: function () {
+            var net_prize = (this.f_prize - this.f_bet);
+            var win_probability = this.f_win_chance / this.f_total_chances;
+            var lose_probability = 1.0 - win_probability;
+            this.f_expected_return = (net_prize * win_probability) - (this.f_bet * lose_probability);
+            if (this.f_expected_return > 0.0) {
+            	this.f_kind_of_bet = "favorable bet! Drain your savings!!";
+            } else if (this.f_expected_return < 0.0) {
+            	this.f_kind_of_bet = "unfavorable bet :(";
+            } else {
+            	this.f_kind_of_bet = "neutral bet - keep yourself safe";
+            }
+        }
+    });
+}
 
     </script>
 </head>
@@ -80,9 +108,65 @@
         <h3>Think Again: How to Reason and Argue</h3>
     </div>
 
+
+
+<!-- BAYE'S THEOREM -->
+    <h2>Baye's Theorem</h2>
+
+    <p>Suppose that Wendy tests positive for <strong>disease X</strong>. The treatment is painful and dangerous, so, before subjecting Wendy to that treatment, her doctor wants to determine how likely it is that Wendy really has <strong>disease X</strong>. </p>
+    <p>One way to calculate probabilities like these uses a famous theorem presented by an English clergyman named Thomas Bayes (1702–1761). We want to figure out the probability of the hypothesis (e.g., Wendy has <strong>disease X</strong>), given the evidence (e.g., Wendy tested positive for <strong>disease X</strong>).</p>
+
+    <p>
+        <strong>Base rate</strong> or <strong>prevalence</strong> is the percentage of general populations <strong>with disease X</strong>
+        <br/>
+        <strong>Sensitivy</strong> is the percentage of cases <strong>with disease X</strong> tested <strong>positive</strong>.
+        <br/>
+        <strong>Specificity</strong> is the percentage of cases <strong>without disease X</strong> that tested <strong>negative</strong>.
+    </p>
+    <p>Let's play!</p>
+
+    <p id="baye" class="example">
+        With a base rate of
+        <span data-var="base_rate" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="0.1" data-max="20"> percent</span>, 
+        a sensitivy of
+        <span data-var="sensitivity" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="80" data-max="99.9"> percent</span>
+        and a specificity of
+        <span data-var="specificity" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="80" data-max="99.9"> percent</span>,
+        we have...
+        <br/>
+        
+        <span class="table">
+            <span class="column"></span>
+            <span class="column"><b>Has disease X</b></span>
+            <span class="column"><b>Not disease X</b></span>
+            <span class="column"><b>Total</b></span>
+        <br/>
+            <span class="column"><b>Tested positive</b></span>
+            <span class="column" data-var="hit" data-format="%d"></span>
+            <span class="column" data-var="false_alarm" data-format="%d"></span>
+            <span class="column" data-var="total_positive" data-format="%d"></span>
+        <br/>  
+            <span class="column"><b>Tested negative</b></span>
+            <span class="column" data-var="miss" data-format="%d"></span>
+            <span class="column" data-var="true_negative" data-format="%d"></span>
+            <span class="column" data-var="total_negative" data-format="%d"></span>
+        <br/>
+            <span class="column"></span>
+            <span class="column" data-var="total_with_disease" data-format="%d"></span>
+            <span class="column" data-var="total_without_disease" data-format="%d"></span>
+            <span class="column"><span data-var="population" class="TKAdjustableNumber" data-min="10000" data-max="1000000" data-step="10000"> people</span></span>
+        </span>
+    
+        With these numbers, Wendy has <strong><span data-var="baye_number" data-format="%8.2f"> percent</span></strong> of chance that she really has <strong>disease X</strong> if tested positive for it.
+    </p>
+    
+
+
+
+<!-- EXPECTED MONETARY VALUE -->
 	<h2>Expected Monetary Value</h2>
 
-    <p>This page helps you with betting.<br/>
+    <p>This section helps you with betting.<br/>
         I mean... you should not bet (right?).<br/>
         But if you do, you have to know this:</p>
 
@@ -127,6 +211,9 @@
         And this is a (financial)
         <strong><span data-var="f_kind_of_bet"></span></strong>.
     </p>
+
+
+
 
     <p class="footer">Totally based on <a href="http://www.worrydream.com/Tangle">Bret Victor's work</a>.
 </div>
