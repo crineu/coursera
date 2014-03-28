@@ -20,8 +20,8 @@
 
 function setUpTangle () {
 
-    var baye_element = document.getElementById("baye");
-    var tangle = new Tangle(baye_element, {
+    var bayes_element = document.getElementById("bayes");
+    var tangle = new Tangle(bayes_element, {
         initialize: function () {
             this.base_rate = 0.3;
             this.sensitivity = 90;
@@ -44,7 +44,7 @@ function setUpTangle () {
             this.total_positive = this.hit + this.false_alarm;
             this.total_negative = this.true_negative + this.miss;
 
-            this.baye_number = 100 * this.hit / this.total_positive;
+            this.bayes_number = 100 * this.hit / this.total_positive;
         }
     });
 
@@ -110,8 +110,8 @@ function setUpTangle () {
 
 
 
-<!-- BAYE'S THEOREM -->
-    <h2>Baye's Theorem</h2>
+<!-- BAYES'S THEOREM -->
+    <h2>Bayes's Theorem</h2>
 
     <p>Suppose that Wendy tests positive for <strong>disease X</strong>. The treatment is painful and dangerous, so, before subjecting Wendy to that treatment, her doctor wants to determine how likely it is that Wendy really has <strong>disease X</strong>. </p>
     <p>One way to calculate probabilities like these uses a famous theorem presented by an English clergyman named Thomas Bayes (1702–1761). We want to figure out the probability of the hypothesis (e.g., Wendy has <strong>disease X</strong>), given the evidence (e.g., Wendy tested positive for <strong>disease X</strong>).</p>
@@ -125,7 +125,7 @@ function setUpTangle () {
     </p>
     <p>Let's play!</p>
 
-    <p id="baye" class="example">
+    <p id="bayes" class="example">
         With a base rate of
         <span data-var="base_rate" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="0.1" data-max="20"> percent</span>, 
         a sensitivy of
@@ -157,7 +157,7 @@ function setUpTangle () {
             <span class="column"><span data-var="population" class="TKAdjustableNumber" data-min="10000" data-max="1000000" data-step="10000"> people</span></span>
         </span>
     
-        With these numbers, Wendy has <strong><span data-var="baye_number" data-format="%8.2f"> percent</span></strong> of chance that she really has <strong>disease X</strong> if tested positive for it.
+        With these numbers, Wendy has <strong><span data-var="bayes_number" data-format="%8.2f"> percent</span></strong> of chance that she really has <strong>disease X</strong> if tested positive for it.
     </p>
     
 
