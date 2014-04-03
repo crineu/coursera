@@ -15,8 +15,43 @@
     <script type="text/javascript" src="TangleKit/BVTouchable.js"></script>
     <script type="text/javascript" src="TangleKit/TangleKit.js"></script>
 
-    <!-- example -->
     <script type="text/javascript">
+
+function Fraction(numerator, denominator) {
+    this.numerator = numerator;
+    this.denominator = denominator;
+    
+    this.toFloat = function() {
+        return this.numerator / this.denominator;
+    }
+
+    this.toFraction = function() {
+        return this.numerator + " in " + this.denominator;
+    }
+
+    this.gcd = function(a, b) {
+        if (!b) {
+            return a;
+        }
+        return this.gcd(b, a % b);
+    };
+
+    this.toMinFraction = function() {
+        var gcd = this.gcd(this.numerator, this.denominator);
+        if (gcd > 1) {
+            var num = this.numerator / gcd;
+            var den = this.denominator / gcd;
+            return num + " in " + den;
+        } else {
+            return this.toFraction();
+        }
+    }
+
+}
+
+// f = new Fraction(18, 30);
+// f.denominator; // 3
+// f.toFloat(); // 0.66666...
 
 function setUpTangle () {
 
@@ -45,6 +80,10 @@ function setUpTangle () {
             this.total_negative = this.true_negative + this.miss;
 
             this.bayes_number = 100 * this.hit / this.total_positive;
+
+            var f = new Fraction(Math.floor(this.hit), Math.floor(this.total_positive));
+            this.bayes_number_fraction = f.toFraction();
+            this.bayes_number_fraction2 = f.toMinFraction();
         }
     });
 
@@ -157,7 +196,12 @@ function setUpTangle () {
             <span class="column"><span data-var="population" class="TKAdjustableNumber" data-min="10000" data-max="1000000" data-step="10000" data-format="%d"> people</span></span>
         </span>
     
-        In this case, Wendy has <strong><span data-var="bayes_number" data-format="%8.2f"> percent</span></strong> of chance that she really has <strong>disease X</strong> if tested positive for it.
+        In this case, Wendy has <strong>
+        <span data-var="bayes_number" data-format="%8.2f"> percent</span>
+        </strong> of chance 
+        (<strong><span data-var="bayes_number_fraction"></span></strong> or
+        <strong><span data-var="bayes_number_fraction2"></span>)</strong>
+        that she really has <strong>disease X</strong> if tested positive for it.
     </p>
     
 
