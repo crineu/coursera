@@ -18,8 +18,8 @@
     <script type="text/javascript">
 
 function Fraction(numerator, denominator) {
-    this.numerator = numerator;
-    this.denominator = denominator;
+    this.numerator = Math.round(numerator);
+    this.denominator = Math.round(denominator);
     
     this.toFloat = function() {
         return this.numerator / this.denominator;
@@ -66,14 +66,17 @@ function setUpTangle () {
         update: function () {
             // Population is divided
             this.total_with_disease = this.population * (this.base_rate / 100);
+            this.total_with_disease = Math.round(this.total_with_disease);
             this.total_without_disease = this.population - this.total_with_disease;
 
             // Hit is a true positive; a false negative is a miss
             this.hit = this.total_with_disease * (this.sensitivity / 100);
+            this.hit = Math.round(this.hit);
             this.miss = this.total_with_disease - this.hit;
 
             // A false positive is a false alarm
             this.true_negative = this.total_without_disease * (this.specificity / 100);
+            this.true_negative = Math.round(this.true_negative);
             this.false_alarm = this.total_without_disease - this.true_negative;
 
             this.total_positive = this.hit + this.false_alarm;
@@ -81,9 +84,9 @@ function setUpTangle () {
 
             this.bayes_number = 100 * this.hit / this.total_positive;
 
-            var f = new Fraction(Math.floor(this.hit), Math.floor(this.total_positive));
+            var f = new Fraction(this.hit, this.total_positive);
             this.bayes_number_fraction = f.toFraction();
-            this.bayes_number_fraction2 = f.toMinFraction();
+            this.bayes_number_fraction_min = f.toMinFraction();
         }
     });
 
@@ -200,7 +203,7 @@ function setUpTangle () {
         <span data-var="bayes_number" data-format="%8.2f"> percent</span>
         </strong> of chance 
         (<strong><span data-var="bayes_number_fraction"></span></strong> or
-        <strong><span data-var="bayes_number_fraction2"></span>)</strong>
+        <strong><span data-var="bayes_number_fraction_min"></span>)</strong>
         that she really has <strong>disease X</strong> if tested positive for it.
     </p>
     
