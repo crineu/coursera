@@ -93,9 +93,9 @@ function setUpTangle () {
     var bet_element = document.getElementById("bet");
     var tangle = new Tangle(bet_element, {
         initialize: function () {
-            this.bet = 10;
-            this.prize = 20;
-            this.win_chance = 1;
+            this.bet = 5;
+            this.prize = 50;
+            this.win_chance = 10;
             this.total_chances = 100;
             this.kind_of_bet = "neutral bet - keep yourself safe";
         },
@@ -118,10 +118,10 @@ function setUpTangle () {
 
     var f_tangle = new Tangle(f_bet_element, {
         initialize: function () {
-            this.f_bet = 10;
-            this.f_prize = 20;
-            this.f_win_chance = 1;
-            this.f_total_chances = 100;
+            this.f_bet = 7.7;
+            this.f_prize = 77;
+            this.f_win_chance = 12.3;
+            this.f_total_chances = 123;
             this.f_kind_of_bet = "neutral bet - keep yourself safe";
         },
         update: function () {
