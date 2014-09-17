@@ -140,7 +140,7 @@ def union(a, b):
 
 def get_next_target(page):
     start_link = page.find('<a href=')
-    if start_link == -1: 
+    if start_link == -1:
         return None, 0
     start_quote = page.find('"', start_link)
     end_quote = page.find('"', start_quote + 1)
@@ -162,7 +162,7 @@ def crawl_web(seed):
     tocrawl = [seed]
     crawled = []
     index = []
-    while tocrawl: 
+    while tocrawl:
         page = tocrawl.pop()
         if page not in crawled:
             content = get_page(page)

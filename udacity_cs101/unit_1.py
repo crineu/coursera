@@ -1,8 +1,8 @@
 # print 'udacity'
 # print 'udacity'[3 + 1]
-# print 'udacity'[2:4]	# initial : final position
-# print 'udacity'[:4]		# until position 4
-# print 'udacity'[2:]		# until the end
+# print 'udacity'[2:4]  # initial : final position
+# print 'udacity'[:4]       # until position 4
+# print 'udacity'[2:]       # until the end
 
 # s = 'audacity'
 # print 'U' + s[2:]
@@ -11,16 +11,16 @@ pythagoras = "There is geometry in the humming of the strings, there is music in
 print pythagoras.find('string')
 print pythagoras[40:]
 print pythagoras.find('T')
-print pythagoras.find('inexistent')	# returns -1
-print pythagoras.find('')			# returns 0
+print pythagoras.find('inexistent') # returns -1
+print pythagoras.find('')           # returns 0
 
-print pythagoras.find('the', 22)	# from that position on
+print pythagoras.find('the', 22)    # from that position on
 
 
 # Extract a link from a page
 page = '<div id="top_bin"><div id="top_content" class="width960"><div class="udacity float-left"><a href="http://www.xkcd.com">'
 
-start_link = page.find('<a href=') 
+start_link = page.find('<a href=')
 start_quote = page.find('"', start_link)
 end_quote = page.find('"', start_quote + 1)
 url = page[start_quote + 1:end_quote]
@@ -42,7 +42,7 @@ print s[:-2] + t[-3:]
 #   text = 'all zip files are zipped' -> 18
 #   text = 'all zip files are compressed' -> -1
 
-text = "all zip files are zipped" 
+text = "all zip files are zipped"
 
 first = text.find('zip')
 print text.find('zip', first + 1)
