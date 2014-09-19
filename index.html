@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Coursera Think Again - week 9 exercise">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/tableless.css">
+
     <title>Coursera week 9</title>
 
-    <!-- Tangle -->
+        <!-- Tangle -->
     <script type="text/javascript" src="Tangle.js"></script>
 
     <!-- TangleKit (optional) -->
     <link rel="stylesheet" href="TangleKit/TangleKit.css" type="text/css">
-    <link rel="stylesheet" href="week_9.css" type="text/css">
+    
     <script type="text/javascript" src="TangleKit/mootools.js"></script>
     <script type="text/javascript" src="TangleKit/sprintf.js"></script>
     <script type="text/javascript" src="TangleKit/BVTouchable.js"></script>
@@ -105,11 +112,11 @@ function setUpTangle () {
             var lose_probability = 1.0 - win_probability;
             this.expected_return = (net_prize * win_probability) - (this.bet * lose_probability);
             if (this.expected_return > 0.0) {
-                this.kind_of_bet = "favorable bet! Drain your savings!!";
+                this.kind_of_bet = "FAVORABLE bet! Drain your savings!!";
             } else if (this.expected_return < 0.0) {
-                this.kind_of_bet = "unfavorable bet :(";
+                this.kind_of_bet = "UNFAVORABLE bet :(";
             } else {
-                this.kind_of_bet = "neutral bet - keep yourself safe";
+                this.kind_of_bet = "NEUTRAL bet - keep yourself safe";
             }
         }
     });
@@ -130,11 +137,11 @@ function setUpTangle () {
             var lose_probability = 1.0 - win_probability;
             this.f_expected_return = (net_prize * win_probability) - (this.f_bet * lose_probability);
             if (this.f_expected_return > 0.0) {
-            	this.f_kind_of_bet = "favorable bet! Drain your savings!!";
+                this.f_kind_of_bet = "favorable bet! Drain your savings!!";
             } else if (this.f_expected_return < 0.0) {
-            	this.f_kind_of_bet = "unfavorable bet :(";
+                this.f_kind_of_bet = "unfavorable bet :( no donnut for you";
             } else {
-            	this.f_kind_of_bet = "neutral bet - keep yourself safe";
+                this.f_kind_of_bet = "neutral bet - keep yourself safe";
             }
         }
     });
@@ -144,125 +151,171 @@ function setUpTangle () {
 </head>
 
 <body onload="setUpTangle();">
-<div id="everything">
-    <div id="header">
-        <h1>Week 9</h1>
-        <h3>Think Again: How to Reason and Argue</h3>
-    </div>
+
+  <!-- HEADER -->
+  <div id="header_wrap" class="outer">
+      <header class="inner">
+        <a id="forkme_banner" href="https://github.com/crineu/coursera">View on GitHub</a>
+
+        <h1 id="project_title">Week 9</h1>
+        <h2 id="project_tagline">Think Again: How to Reason and Argue</h2>
+
+        <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/crineu/coursera/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/crineu/coursera/tarball/master">Download this project as a tar.gz file</a>
+        </section>
+    </header>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+      
+  <!-- BAYES'S THEOREM -->
+      <h3>
+        <a name="welcome-to-github-pages" class="anchor"><span class="octicon octicon-link"></span></a>Bayes's Theorem
+      </h3>
+
+      <p>Suppose that Wendy tests positive for <strong>disease X</strong>. The treatment is painful and dangerous, so, before subjecting Wendy to that treatment, her doctor wants to determine how likely it is that Wendy really has <strong>disease X</strong>. </p>
+      <p>One way to calculate probabilities like these uses a famous theorem presented by an English clergyman named Thomas Bayes (1702–1761). We want to figure out the probability of the hypothesis (e.g., Wendy has <strong>disease X</strong>), given the evidence (e.g., Wendy tested positive for <strong>disease X</strong>).</p>
+
+      <ul>
+          <li>
+            <strong>Base rate</strong> or <strong>prevalence</strong> is the percentage of general populations <strong>with disease X</strong>
+          </li>
+          <li>
+            <strong>Sensitivy</strong> is the percentage of cases <strong>with disease X</strong> tested <strong>positive</strong>.
+          </li>
+          <li>
+            <strong>Specificity</strong> is the percentage of cases <strong>without disease X</strong> that tested <strong>negative</strong>.
+          </li>
+      </ul>
+
+      <p>Let's play!</p>
+
+  <!-- example 1 -->
+  <p id="bayes" class="example">
+      With a base rate of
+      <span data-var="base_rate" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="0.1" data-max="20"> percent</span>, 
+      a sensitivy of
+      <span data-var="sensitivity" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="80" data-max="99.9"> percent</span>
+      and a specificity of
+      <span data-var="specificity" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="80" data-max="99.9"> percent</span>,
+      we have...
+      
+      <span class="table">
+      <span class="row">
+          <span class="cell"></span>
+          <span class="cell"><b>Has disease X</b></span>
+          <span class="cell"><b>No disease X</b></span>
+          <span class="cell"><b>Total</b></span>
+      </span>
+      <span class="row">
+          <span class="cell"><b>Tested positive</b></span>
+          <span class="cell" data-var="hit" data-format="%d"></span>
+          <span class="cell" data-var="false_alarm" data-format="%d"></span>
+          <span class="cell" data-var="total_positive" data-format="%d"></span>
+      </span>
+      <span class="row">
+          <span class="cell"><b>Tested negative</b></span>
+          <span class="cell" data-var="miss" data-format="%d"></span>
+          <span class="cell" data-var="true_negative" data-format="%d"></span>
+          <span class="cell" data-var="total_negative" data-format="%d"></span>
+      </span>
+      <span class="row">
+          <span class="cell"></span>
+          <span class="cell" data-var="total_with_disease" data-format="%d"></span>
+          <span class="cell" data-var="total_without_disease" data-format="%d"></span>
+          <span class="cell"><span data-var="population" class="TKAdjustableNumber" data-min="10000" data-max="1000000" data-step="10000" data-format="%d"> people</span></span>
+      </span>
+      </span>
+  
+      In this case, Wendy has <strong>
+      <span data-var="bayes_number" data-format="%8.2f"> percent</span>
+      </strong> of chance 
+      (<strong><span data-var="bayes_number_fraction"></span></strong> or
+      <strong><span data-var="bayes_number_fraction_min"></span>)</strong>
+      that she really has <strong>disease X</strong> if tested positive for it.
+  </p>
+  <!-- example 1 -->            
+
+
+  <!-- EXPECTED MONETARY VALUE -->
+      <h3>
+        <a name="designer-templates" class="anchor" ><span class="octicon octicon-link"></span></a>Expected Monetary Value
+      </h3>
+
+      <p>This section helps you with betting.<br/>
+      I mean... you should not bet.<br/>
+      (right?)<br/>
+      But if you do, you have to know this:</p>
+
+      <p><ul><li> 
+        <strong>Expected monetary value</strong> = (<strong>probability of winning</strong> times <strong>net gain in money of winning</strong>) minus (<strong>probability of losing</strong> times <strong>net loss in money of losing</strong>)
+      </li></ul></p>
+
+  <!-- example 2  -->
+  <p id="bet" class="example">
+      Let's say you bet 
+      <span data-var="bet" class="TKAdjustableNumber" data-min="1" data-max="99"> dollars</span>
+      to win a total of 
+      <span data-var="prize" class="TKAdjustableNumber" data-step="10" data-min="10" data-max="10000" data-format="%d"> dollars</span>,
+      and you have
+      <span data-var="win_chance" class="TKAdjustableNumber" data-step="1" data-min="1" data-max="99"></span>
+      in
+      <span data-var="total_chances" class="TKAdjustableNumber" data-step="10" data-min="100" data-max="50000" data-format="%d"></span>
+      chances of winning.
+      
+      <br/>
+      <br/>
+      
+      It's obvious that the expected return is <strong>US$
+      <span data-var="expected_return" data-format="%8.2f" /></strong>.
+      <br/>
+      And this is a (financial)
+      <strong><span data-var="kind_of_bet"></span></strong>
+  </p>
+
+  <p>Feel free to enter your precise numbers here:</p>
+
+  <p id="free_bet" class="example">
+      Let's say you bet 
+      <span data-var="f_bet" class="TKNumberField"> dollars</span>
+      to win a total of 
+      <span data-var="f_prize" class="TKNumberField"> dollars</span>,
+      and you have
+      <span data-var="f_win_chance" class="TKNumberField"></span>
+      in
+      <span data-var="f_total_chances" class="TKNumberField"></span>
+      chances of winning.
+      <br/>
+      <br/>
+      It's obvious that the expected return is <strong>US$
+      <span data-var="f_expected_return" data-format="%8.2f" /></strong>.
+      <br/>
+      And this is a (financial)
+      <strong><span data-var="f_kind_of_bet"></span></strong>.
+  </p>
+  <!-- example 2  -->
+
+      <h3>
+        <a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact
+      </h3>
+
+      <p>Having trouble with these simulations? Check out the original course at <a href="https://www.coursera.org/course/thinkagain">https://www.coursera.org/course/thinkagain</a>. It is awesome.</p>
+
+    </section>
+  </div>
 
 
 
-<!-- BAYES'S THEOREM -->
-    <h2>Bayes's Theorem</h2>
+  <!-- FOOTER  -->
+  <div id="footer_wrap" class="outer">
+    <footer class="inner">
+      <p class="copyright">Project maintained by <a href="https://github.com/crineu">crineu</a> and totally based on <a href="http://www.worrydream.com/Tangle">Bret Victor's work.</a></p>
+      <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+    </footer>
+  </div>
 
-    <p>Suppose that Wendy tests positive for <strong>disease X</strong>. The treatment is painful and dangerous, so, before subjecting Wendy to that treatment, her doctor wants to determine how likely it is that Wendy really has <strong>disease X</strong>. </p>
-    <p>One way to calculate probabilities like these uses a famous theorem presented by an English clergyman named Thomas Bayes (1702–1761). We want to figure out the probability of the hypothesis (e.g., Wendy has <strong>disease X</strong>), given the evidence (e.g., Wendy tested positive for <strong>disease X</strong>).</p>
-
-    <p>
-        <strong>Base rate</strong> or <strong>prevalence</strong> is the percentage of general populations <strong>with disease X</strong>
-        <br/>
-        <strong>Sensitivy</strong> is the percentage of cases <strong>with disease X</strong> tested <strong>positive</strong>.
-        <br/>
-        <strong>Specificity</strong> is the percentage of cases <strong>without disease X</strong> that tested <strong>negative</strong>.
-    </p>
-    <p>Let's play!</p>
-
-    <p id="bayes" class="example">
-        With a base rate of
-        <span data-var="base_rate" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="0.1" data-max="20"> percent</span>, 
-        a sensitivy of
-        <span data-var="sensitivity" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="80" data-max="99.9"> percent</span>
-        and a specificity of
-        <span data-var="specificity" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="80" data-max="99.9"> percent</span>,
-        we have...
-        <br/>
-        
-        <span class="table">
-            <span class="column"></span>
-            <span class="column"><b>Has disease X</b></span>
-            <span class="column"><b>Not disease X</b></span>
-            <span class="column"><b>Total</b></span>
-        <br/>
-            <span class="column"><b>Tested positive</b></span>
-            <span class="column" data-var="hit" data-format="%d"></span>
-            <span class="column" data-var="false_alarm" data-format="%d"></span>
-            <span class="column" data-var="total_positive" data-format="%d"></span>
-        <br/>  
-            <span class="column"><b>Tested negative</b></span>
-            <span class="column" data-var="miss" data-format="%d"></span>
-            <span class="column" data-var="true_negative" data-format="%d"></span>
-            <span class="column" data-var="total_negative" data-format="%d"></span>
-        <br/>
-            <span class="column"></span>
-            <span class="column" data-var="total_with_disease" data-format="%d"></span>
-            <span class="column" data-var="total_without_disease" data-format="%d"></span>
-            <span class="column"><span data-var="population" class="TKAdjustableNumber" data-min="10000" data-max="1000000" data-step="10000" data-format="%d"> people</span></span>
-        </span>
-    
-        In this case, Wendy has <strong>
-        <span data-var="bayes_number" data-format="%8.2f"> percent</span>
-        </strong> of chance 
-        (<strong><span data-var="bayes_number_fraction"></span></strong> or
-        <strong><span data-var="bayes_number_fraction_min"></span>)</strong>
-        that she really has <strong>disease X</strong> if tested positive for it.
-    </p>
-    
-
-
-
-<!-- EXPECTED MONETARY VALUE -->
-	<h2>Expected Monetary Value</h2>
-
-    <p>This section helps you with betting.<br/>
-        I mean... you should not bet (right?).<br/>
-        But if you do, you have to know this:</p>
-
-	<p> <strong>Expected monetary value</strong> = (<strong>probability of winning</strong> times <strong>net gain in money of winning</strong>) minus (<strong>probability of losing</strong> times <strong>net loss in money of losing</strong>)</p>
-
-    <p id="bet" class="example">
-        Let's say you bet 
-        <span data-var="bet" class="TKAdjustableNumber" data-min="1" data-max="99"> dollars</span>
-        to win a total of 
-        <span data-var="prize" class="TKAdjustableNumber" data-step="10" data-min="10" data-max="10000" data-format="%d"> dollars</span>,
-        and you have
-        <span data-var="win_chance" class="TKAdjustableNumber" data-step="1" data-min="1" data-max="99"></span>
-        in
-        <span data-var="total_chances" class="TKAdjustableNumber" data-step="10" data-min="100" data-max="50000" data-format="%d"></span>
-        chances of winning.
-        <br/>
-        <br/>
-        It's obvious that the expected return is <strong>US$
-        <span data-var="expected_return" data-format="%8.2f" /></strong>.
-        <br/>
-        And this is a (financial)
-        <strong><span data-var="kind_of_bet"></span></strong>.
-    </p>
-
-    <p>Feel free to enter your numbers in this case:</p>
-
-    <p id="free_bet" class="example">
-        Let's say you bet 
-        <span data-var="f_bet" class="TKNumberField"> dollars</span>
-        to win a total of 
-        <span data-var="f_prize" class="TKNumberField"> dollars</span>,
-        and you have
-        <span data-var="f_win_chance" class="TKNumberField"></span>
-        in
-        <span data-var="f_total_chances" class="TKNumberField"></span>
-        chances of winning.
-        <br/>
-        <br/>
-        It's obvious that the expected return is <strong>US$
-        <span data-var="f_expected_return" data-format="%8.2f" /></strong>.
-        <br/>
-        And this is a (financial)
-        <strong><span data-var="f_kind_of_bet"></span></strong>.
-    </p>
-
-
-
-
-    <p class="footer">Totally based on <a href="http://www.worrydream.com/Tangle">Bret Victor's work</a>.
-</div>
 </body>
 </html>
