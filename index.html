@@ -11,12 +11,12 @@
 
     <title>Coursera week 9</title>
 
-        <!-- Tangle -->
+    <!-- Tangle -->
     <script type="text/javascript" src="Tangle.js"></script>
 
     <!-- TangleKit (optional) -->
     <link rel="stylesheet" href="TangleKit/TangleKit.css" type="text/css">
-    
+
     <script type="text/javascript" src="TangleKit/mootools.js"></script>
     <script type="text/javascript" src="TangleKit/sprintf.js"></script>
     <script type="text/javascript" src="TangleKit/BVTouchable.js"></script>
@@ -27,7 +27,7 @@
 function Fraction(numerator, denominator) {
     this.numerator = Math.round(numerator);
     this.denominator = Math.round(denominator);
-    
+
     this.toFloat = function() {
         return this.numerator / this.denominator;
     }
@@ -161,8 +161,8 @@ function setUpTangle () {
         <h2 id="project_tagline">Think Again: How to Reason and Argue</h2>
 
         <section id="downloads">
-            <a class="zip_download_link" href="https://github.com/crineu/coursera/zipball/master">Download this project as a .zip file</a>
-            <a class="tar_download_link" href="https://github.com/crineu/coursera/tarball/master">Download this project as a tar.gz file</a>
+            <a class="zip_download_link" href="https://github.com/crineu/coursera/zipball/gh-pages">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/crineu/coursera/tarball/gh-pages">Download this project as a tar.gz file</a>
         </section>
     </header>
   </div>
@@ -170,7 +170,7 @@ function setUpTangle () {
   <!-- MAIN CONTENT -->
   <div id="main_content_wrap" class="outer">
     <section id="main_content" class="inner">
-      
+
   <!-- BAYES'S THEOREM -->
       <h3>
         <a name="welcome-to-github-pages" class="anchor"><span class="octicon octicon-link"></span></a>Bayes's Theorem
@@ -196,13 +196,13 @@ function setUpTangle () {
   <!-- example 1 -->
   <p id="bayes" class="example">
       With a base rate of
-      <span data-var="base_rate" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="0.1" data-max="20"> percent</span>, 
+      <span data-var="base_rate" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="0.1" data-max="20"> percent</span>,
       a sensitivy of
       <span data-var="sensitivity" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="80" data-max="99.9"> percent</span>
       and a specificity of
       <span data-var="specificity" class="TKAdjustableNumber" data-format="%8.1f" data-step="0.1" data-min="80" data-max="99.9"> percent</span>,
       we have...
-      
+
       <span class="table">
       <span class="row">
           <span class="cell"></span>
@@ -229,15 +229,15 @@ function setUpTangle () {
           <span class="cell"><span data-var="population" class="TKAdjustableNumber" data-min="10000" data-max="1000000" data-step="10000" data-format="%d"> people</span></span>
       </span>
       </span>
-  
+
       In this case, Wendy has <strong>
       <span data-var="bayes_number" data-format="%8.2f"> percent</span>
-      </strong> of chance 
+      </strong> of chance
       (<strong><span data-var="bayes_number_fraction"></span></strong> or
       <strong><span data-var="bayes_number_fraction_min"></span>)</strong>
       that she really has <strong>disease X</strong> if tested positive for it.
   </p>
-  <!-- example 1 -->            
+  <!-- example 1 -->
 
 
   <!-- EXPECTED MONETARY VALUE -->
@@ -250,25 +250,25 @@ function setUpTangle () {
       (right?)<br/>
       But if you do, you have to know this:</p>
 
-      <p><ul><li> 
+      <p><ul><li>
         <strong>Expected monetary value</strong> = (<strong>probability of winning</strong> times <strong>net gain in money of winning</strong>) minus (<strong>probability of losing</strong> times <strong>net loss in money of losing</strong>)
       </li></ul></p>
 
   <!-- example 2  -->
   <p id="bet" class="example">
-      Let's say you bet 
+      Let's say you bet
       <span data-var="bet" class="TKAdjustableNumber" data-min="1" data-max="99"> dollars</span>
-      to win a total of 
+      to win a total of
       <span data-var="prize" class="TKAdjustableNumber" data-step="10" data-min="10" data-max="10000" data-format="%d"> dollars</span>,
       and you have
       <span data-var="win_chance" class="TKAdjustableNumber" data-step="1" data-min="1" data-max="99"></span>
       in
       <span data-var="total_chances" class="TKAdjustableNumber" data-step="10" data-min="100" data-max="50000" data-format="%d"></span>
       chances of winning.
-      
+
       <br/>
       <br/>
-      
+
       It's obvious that the expected return is <strong>US$
       <span data-var="expected_return" data-format="%8.2f" /></strong>.
       <br/>
@@ -279,9 +279,9 @@ function setUpTangle () {
   <p>Feel free to enter your precise numbers here:</p>
 
   <p id="free_bet" class="example">
-      Let's say you bet 
+      Let's say you bet
       <span data-var="f_bet" class="TKNumberField"> dollars</span>
-      to win a total of 
+      to win a total of
       <span data-var="f_prize" class="TKNumberField"> dollars</span>,
       and you have
       <span data-var="f_win_chance" class="TKNumberField"></span>
