@@ -23,7 +23,7 @@ span.table {
 }
 
 span.row {
-  display: table-row; 
+  display: table-row;
 }
 
 span.cell {
@@ -32,4 +32,8 @@ span.cell {
   display: table-cell;
   text-align: right;
   padding-right: 4px;
+}
+
+input.TKNumberFieldInput {
+  text-align: right;
 }

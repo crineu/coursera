@@ -116,7 +116,7 @@ function setUpTangle () {
             } else if (this.expected_return < 0.0) {
                 this.kind_of_bet = "UNFAVORABLE bet :(";
             } else {
-                this.kind_of_bet = "NEUTRAL bet - keep yourself safe";
+                this.kind_of_bet = "NEUTRAL bet - keep yourself safe.";
             }
         }
     });
@@ -137,11 +137,11 @@ function setUpTangle () {
             var lose_probability = 1.0 - win_probability;
             this.f_expected_return = (net_prize * win_probability) - (this.f_bet * lose_probability);
             if (this.f_expected_return > 0.0) {
-                this.f_kind_of_bet = "favorable bet! Drain your savings!!";
+                this.f_kind_of_bet = "FAVORABLE bet! Drain your savings!!";
             } else if (this.f_expected_return < 0.0) {
-                this.f_kind_of_bet = "unfavorable bet :( no donnut for you";
+                this.f_kind_of_bet = "UNFAVORABLE bet - no donut for you.";
             } else {
-                this.f_kind_of_bet = "neutral bet - keep yourself safe";
+                this.f_kind_of_bet = "NEUTRAL bet - keep yourself safe.";
             }
         }
     });
@@ -294,7 +294,7 @@ function setUpTangle () {
       <span data-var="f_expected_return" data-format="%8.2f" /></strong>.
       <br/>
       And this is a (financial)
-      <strong><span data-var="f_kind_of_bet"></span></strong>.
+      <strong><span data-var="f_kind_of_bet"></span></strong>
   </p>
   <!-- example 2  -->
 
